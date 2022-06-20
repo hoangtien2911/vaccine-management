@@ -150,6 +150,7 @@ public class MyToys {
                 System.out.println("The second dose of vaccine must be given 4 to 12 weeks after the first injection !");
                 System.out.println("Your first dose of vaccine was given on "+ date1);
             }
+            return date2;
         }
     }
     

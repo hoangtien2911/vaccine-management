@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Hoang-Tien | fb/htmsyunh/
+ * Version1 17-01-2022
+ * Learn from teacher Nguyen-The-Hoang and references from many sources.
  */
 package data;
 
@@ -18,12 +19,12 @@ public class InjectionList implements List{
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RESET = "\u001B[0m";
-    StudentList studentList = new StudentList();
-    VaccineList vaccineList = new VaccineList();
-    ArrayList<Injection> injectionList = new ArrayList();
+    private StudentList studentList = new StudentList();
+    private VaccineList vaccineList = new VaccineList();
+    private ArrayList<Injection> injectionList = new ArrayList();
 
     public InjectionList() {
-        this.readFile();
+        readFile();
     }
     
     //ADD
@@ -76,9 +77,10 @@ public class InjectionList implements List{
     public void searchInjectionByStudentID() {
         String id = studentList.menuStudent();
         for (Injection injection : injectionList) {
-            if(injection.getStudentID().equalsIgnoreCase(id))
+            if(injection.getStudentID().equalsIgnoreCase(id)) {
                 infoAInjection(injection.getInjectionID());
-            return;
+                return;
+            }
         }
         System.out.println(ANSI_RED + "Students have not been vaccinated. Not found in the list." + ANSI_RESET);
     }
@@ -97,12 +99,12 @@ public class InjectionList implements List{
             System.out.println(ANSI_RED + "Injection does not exist!" + ANSI_RESET);
             return;
         }
-        if(searchInjection(id).getSecondDate().equals("null") && searchInjection(id).getSecondPlace().equals("null")) {
+        if(searchInjection(id).getSecondDate() == null && searchInjection(id).getSecondPlace() == null) {
             System.out.println(ANSI_BLUE + "The injection you want to update: " + ANSI_RESET);
             infoAInjection(id);
             searchInjection(id).setSecondPlace(MyToys.getPlace("Enter the place of the second injection: ", "Input invalid!"));
             searchInjection(id).setSecondDate(MyToys.getDate2(searchInjection(id).getFirstDate()));
-            System.out.println(ANSI_GREEN + "Update successfully!" + ANSI_RESET);  
+            System.out.println(ANSI_GREEN + "Update successfully!" + ANSI_RESET);
         }
         else{
             System.out.println(ANSI_RED + "Student has completed 2 injections!" + ANSI_RESET);
@@ -138,11 +140,12 @@ public class InjectionList implements List{
     public void display() {
         if(injectionList.isEmpty()){
             System.out.println(ANSI_RED + "The injection list is empty!" +ANSI_RESET);
+            return;
         }
         
         int check = 0;
         for (Injection injection : injectionList) {
-            if(studentList.search(injection.getStudentID())!=null){
+            if(studentList.search(injection.getStudentID())!= null){
                 check++;
             }
         }
@@ -246,7 +249,7 @@ public class InjectionList implements List{
     public void saveFile() {
         try {
             FileWriter fw = new FileWriter("injection.txt");
-//            fw.write(String.format("%-10s|%-10s|%-15s|%-10s|%-15s|%-10s|%-10s|\n", "ID","STUDENT_ID","1ST_PLACE", "1ST_DATE", "2ND_PLACE", "2ND_DATE", "VACCINE_ID"));
+            fw.write(String.format("%-10s|%-10s|%-15s|%-10s|%-15s|%-10s|%-10s|\n", "ID","STUDENT_ID","1ST_PLACE", "1ST_DATE", "2ND_PLACE", "2ND_DATE", "VACCINE_ID"));
             for (Injection ij : injectionList) {
                 fw.write(ij.toString());
             }

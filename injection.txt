@@ -1,0 +1,3 @@
+ID        |STUDENT_ID|1ST_PLACE      |1ST_DATE  |2ND_PLACE      |2ND_DATE  |VACCINE_ID|
+ID        |STUDENT_ID|1ST_PLACE      |1ST_DATE  |2ND_PLACE      |2ND_DATE  |VACCINE_ID|
+1         |SE140002  |HA NOI         |29/11/2021|NINH BINH      |1/1/2022  |4         |
